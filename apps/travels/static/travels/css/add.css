@@ -1,0 +1,20 @@
+body{
+  margin: 0;
+}
+.navbar{
+  height: 25px;
+  line-height: 1.25em;
+  border-bottom: 1px solid black;
+  text-align: right;
+}
+.navbar a{
+  display: inline-block;
+  margin: 5px 10px;
+}
+#add_form{
+  width: 25%;
+  border: 1px solid black;
+}
+.entry label{
+  width: 50%;
+}

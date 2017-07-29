@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Destination</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'travels/css/destination.css' %}">
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="{% url 'travels:index' %}">Home</a>
+      <a href="{% url 'travels:logout' %}">Logout</a>
+    </div>
+    <div id="main">
+      <h1>{{trip.destination}}</h1>
+      <h2>Planned By: {{trip.user_id.name}}</h2>
+      <h2>Description: {{trip.description}}</h2>
+      <h2>Travel Date From: {{trip.travel_start_date}}</h2>
+      <h2>Travel Date To: {{trip.travel_end_date}}</h2>
+    </div>
+    <div id="join">
+      <h1>Other users joining the trip:</h1>
+      {% if trip.joined_user_id.all %}
+        {% for user in trip.joined_user_id.all %}
+          <p>{{user.name}}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </body>
+</html>

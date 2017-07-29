@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Travel Dashboard</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'travels/css/main.css' %}">
+  </head>
+  <body>
+    <div class="navbar">
+      <h2 id="user">Hello, {{user.name}}!</h2>
+      <a id="logout" href="{% url 'travels:logout' %}">Logout</a>
+    </div>
+    <h2>Your Trip Schedules</h2>
+    <table>
+      <tr>
+        <th>Destination</th>
+        <th>Travel Start Date</th>
+        <th>Travel End Date</th>
+        <th>Plan</th>
+      </tr>
+      {% if user_trips %}
+        {% for trip in user_trips %}
+          <tr>
+            <td><a href="{% url 'travels:destination' id=trip.id %}">{{trip.destination}}</a></td>
+            <td>{{trip.travel_start_date}}</td>
+            <td>{{trip.travel_end_date}}</td>
+            <td>{{trip.description}}</td>
+          </tr>
+        {% endfor %}
+      {% endif %}
+    </table>
+    <h2>Other User's Travel Plans</h2>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Destination</th>
+        <th>Travel Start Date</th>
+        <th>Travel End Date</th>
+        <th>Do You Want to Join?</th>
+      </tr>
+      {% if other_trips %}
+        {% for trip in other_trips %}
+          <tr>
+            <td>{{trip.user_id.name}}</td>
+            <td><a href="{% url 'travels:destination' id=trip.id %}">{{trip.destination}}</a></td>
+            <td>{{trip.travel_start_date}}</td>
+            <td>{{trip.travel_end_date}}</td>
+            <td><a href="{% url 'travels:join' id=trip.id %}">Join</a></td>
+          </tr>
+        {% endfor %}
+      {% endif %}
+    </table>
+    <div class="footer">
+      <a href="{% url 'travels:add' %}"><h2 id="add_travel">Add Travel Plan</h2></a>
+    </div>
+  </body>
+</html>
